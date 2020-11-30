@@ -41,7 +41,7 @@ body{
     padding-top: 10px;
 }
 
-.link{
+.link-sign,.link-login{
     text-decoration: none;
     font-size: 18px;
     color: rgba(0,0,0,1);
@@ -50,7 +50,7 @@ body{
     margin-right: 40px;
 }
 
-.link:hover{
+.link-sign:hover,.link-login:hover{
     color: rgb(88,81,219);
 }
 
