@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+{% block title %}
+Login | Domain - Keeper
+{% endblock %}
+
+{% block link %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='auth.css') }}">
+{% endblock link %}
+
+{% block content %}
+<section class="auth-form">
+    <div id="auth-head">
+        <h1>
+            Login To Your Account
+        </h1>
+    </div>
+    <form class="form" method="POST">
+        {{ form.hidden_tag() }}
+
+        <div class="group">
+            {{ form.username.label(class_="label") }}
+            {% if form.username.errors %}
+                {{ form.username(class_="input-error",autocomplete="off",value="") }}
+                <br>
+                {% for error in form.username.errors %}
+                    <span class="invalid">{{error}}</span>
+                {% endfor %}
+            {% else %}
+                {{ form.username(class_="input",autocomplete="off") }}
+            {% endif %}
+        </div>
+
+        <div class="group">
+            {{ form.email.label(class_="label") }}
+            {% if form.email.errors %}
+                {{ form.email(class_="input-error",autocomplete="off") }}
+                <br>
+                {% for error in form.email.errors %}
+                    <span class="invalid">{{error}}</span>
+                {% endfor %}
+            {% else %}
+                {{ form.email(class_="input",autocomplete="off") }}
+            {% endif %}
+        </div>
+
+        <div class="group">
+            {{ form.password.label(class_="label") }}
+            {% if form.password.errors %}
+                {{ form.password(class_="input-error",autocomplete="off",value="") }}
+                <br>
+                {% for error in form.password.errors %}
+                    <span class="invalid">{{error}}</span>
+                {% endfor %}
+            {% else %}
+                {{ form.password(class_="input",autocomplete="off") }}
+            {% endif %}
+        </div>
+
+        <div class="group-sub">
+            {{ form.submit(class_="sub") }}
+        </div>
+
+    </form>
+</section>
+{% endblock %}
