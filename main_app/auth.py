@@ -2,7 +2,7 @@ from flask import Blueprint,render_template,url_for,flash,request
 from main_app.forms import SignupForm,LoginForm
 from main_app.models import User
 from main_app.ext import (db , bcrypt)
-from flask_login import login_user,current_user
+from flask_login import login_user,current_user,logout_user
 
 
 auth_bp = Blueprint("auth",__name__)
@@ -44,5 +44,10 @@ def login():
     return render_template("login.html",form=form)
         
 
+
+@auth_bp.route("/logout")
+def logout():
+    logout_user()
+    return redirect(url_for("route_bp.index")) 
 
 
