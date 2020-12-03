@@ -13,12 +13,41 @@
         <div class="container">
             <h1 class="logo"><a href="/" id="logo-a">Domain-Keeper</a></h1>
             <ul class="links">
-                <li><a href="" class="link-login">Log in</a></li>
-                <li><a href="" class="link-sign">Sign Up</a></li>
+                <li><a href="/login" class="link">Log in</a></li>
+                <li><a href="/signup" class="link">Sign Up</a></li>
             </ul>
         </div>
     </nav>
     {% block content %}
     {% endblock %}
+    <footer>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% if success_or_not(messages) %}
+              <div class="flash_box-green">
+                <img src="{{ url_for('static',filename='default_imgs/cross.png') }}" id="cross_btn">
+                {% for message in messages %}
+                  <div class="flash_msg_box">
+                    <p id="flash_text">
+                        {{ message }}
+                    </p>
+                  </div>
+                {% endfor %}
+              </div>
+            {% else %}
+              <div class="flash_box-red">
+                <img src="{{ url_for('static',filename='default_imgs/cross.png') }}" id="cross_btn">
+                {% for message in messages %}
+                  <div class="flash_msg_box">
+                    <p id="flash_text">
+                        {{ message }}
+                    </p>
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+          {% endif %}
+        {% endwith %}
+    </footer>
 </body>
 </html>

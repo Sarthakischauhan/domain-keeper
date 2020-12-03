@@ -41,7 +41,7 @@ body{
     padding-top: 10px;
 }
 
-.link-sign,.link-login{
+.link{
     text-decoration: none;
     font-size: 18px;
     color: rgba(0,0,0,1);
@@ -50,9 +50,51 @@ body{
     margin-right: 40px;
 }
 
-.link-sign:hover,.link-login:hover{
+.link:hover{
     color: rgb(88,81,219);
 }
+
+
+
+.flash_box-green,.flash_box-red{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+ }
+
+.flash_box-green{
+    background: lightgreen;
+    color: green;
+}
+.flash_box-red{
+    background: #ffcccb;
+    color: red;
+}
+
+
+.flash_msg_box{
+    width: 100%;
+    text-align: center;
+    padding-bottom: 17px;
+}
+
+
+#flash_text{
+    font-size: 14px;
+    font-weight: bolder;
+}
+
+#cross_btn{
+    width: 22px;
+    margin-left:auto;
+    border-radius: 50%;
+    background: white;
+    border:1px solid black;
+    cursor: pointer;
+    display: block;
+}
+
+
 
 @media only screen and (max-width: 768px) {
     .container{
@@ -107,6 +149,9 @@ body{
     }
     .links{
         padding-top: 0px;
+    }
+    .cross_btm{
+        width: 18px;
     }
 
 }
