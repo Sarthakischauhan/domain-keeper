@@ -56,6 +56,11 @@ Login | Domain - Keeper
             {% endif %}
         </div>
 
+        <div class="group">
+            {{ form.remember(class_="checkbox") }}
+            {{ form.remember.label(class_="check-label")}}
+        </div>
+
         <div class="group-sub">
             {{ form.submit(class_="sub") }}
         </div>

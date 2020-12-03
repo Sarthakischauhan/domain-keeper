@@ -82,6 +82,12 @@ Signup | Domain - Keeper
                 {{ form.confirm(class_="input",autocomplete="off") }}
             {% endif %}
         </div>
+
+        <div class="group">
+            {{ form.checkbox(class_="checkbox") }}
+            {{ form.checkbox.label(class_="check-label")}}
+        </div>
+
         <div class="group-sub">
             {{ form.submit(class_="sub") }}
         </div>
