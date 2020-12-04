@@ -1,0 +1,2 @@
+#! /usr/bin/env bash
+echo export FLASK_APP=app.py

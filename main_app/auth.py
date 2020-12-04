@@ -37,7 +37,7 @@ def login():
             login_user(user,remember=form.remember.data)
             next_page = request.args.get("next")
             flash("Welcome.Login Successful")
-            return "nice work mate" if next_page else redirect(url_for("routes_bp.index"))
+            return redirect(url_for("routes_bp.account",username=current_user.username)) if next_page else redirect(url_for("routes_bp.index"))
         else :
             flash("Login Unsuccessfull")
 

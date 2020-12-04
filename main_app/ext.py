@@ -10,7 +10,7 @@ login_manager = LoginManager(app)
 bcrypt = Bcrypt(app)
 migrate = Migrate(app,db)
 
-login_manager.login_view = "auths_bp.login"
+login_manager.login_view = "auth_bp.login"
 
 @app.context_processor
 def success_rate():
