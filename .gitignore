@@ -2,3 +2,4 @@ venv/
 structure.txt
 __pycache__/
 Instance/
+bash-scrpt.sh
