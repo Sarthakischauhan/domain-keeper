@@ -15,6 +15,8 @@ def sample_auth():
 
 @auth_bp.route("/signup",methods=["GET","POST"])
 def signup():
+    if current_user.is_authenticated:
+        return redirect(url_for("routes_bp.account",username = current_user.username))
     form = SignupForm()
     if form.validate_on_submit():
         pass_hash = bcrypt.generate_password_hash(form.password.data)
@@ -30,6 +32,8 @@ def signup():
 
 @auth_bp.route("/login",methods=["GET","POST"])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for("routes_bp.account",username = current_user.username))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
