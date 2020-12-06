@@ -24,7 +24,7 @@
         {% with messages = get_flashed_messages() %}
           {% if messages %}
             {% if success_or_not(messages) %}
-              <div class="flash_box-green">
+              <div class="flash_box-green" id="flash_box-green">
                 <img src="{{ url_for('static',filename='default_imgs/cross.png') }}" id="cross_btn">
                 {% for message in messages %}
                   <div class="flash_msg_box">
@@ -35,7 +35,7 @@
                 {% endfor %}
               </div>
             {% else %}
-              <div class="flash_box-red">
+              <div class="flash_box-red" id="flash_box-red">
                 <img src="{{ url_for('static',filename='default_imgs/cross.png') }}" id="cross_btn">
                 {% for message in messages %}
                   <div class="flash_msg_box">
