@@ -25,6 +25,7 @@ class Link(db.Model):
     id=db.Column(db.Integer,primary_key=True)
     user_link = db.Column(db.String(240),nullable=False)
     title =  db.Column(db.String(30),nullable=False)
+    description = db.Column(db.String(30))
     link_type =  db.Column(db.String(20),nullable=False)
     user_id = db.Column(db.Integer,db.ForeignKey('user.id'))
 
