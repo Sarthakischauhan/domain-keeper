@@ -108,6 +108,13 @@ body{
         font-size: 15px;
         margin-right: 20px;
     }
+    .acc-username{
+        font-size: 32px;
+    }
+    .acc-name{
+        font-size: 17px;
+    }
+
 }
 
 @media only screen and (max-width: 540px) {
@@ -131,7 +138,7 @@ body{
     }
 }
 
-@media only screen and (max-width: 300px) {
+@media only screen and (max-width: 305px) {
     .container{
         flex-direction: column;
         align-items: center;

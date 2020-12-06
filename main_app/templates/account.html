@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block title %}
+{{ current_user.username }} | Domain - Keeper
+{% endblock %}
+
+{% block link %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='account.css') }}">
+{% endblock link %}
+
+{% block content %}
+<section class="account-info">
+    <div class="avatar-img">
+        <img src="{{ url_for('static',filename='default_imgs/cowboy.png') }}" id="avatar-img">
+    </div>
+    <div class="info">
+        <h1 id="acc-username">{{ current_user.username }}</h1>
+        <h4 id="acc-name">{{ current_user.name }}</h4>
+        <!-- No of links with us-->
+    </div>
+</section>
+
+<section class="add-link">
+    wait
+</section>
+
+
+{% endblock %}

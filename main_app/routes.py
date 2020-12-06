@@ -1,4 +1,4 @@
-from flask import Blueprint,render_template,url_for
+from flask import Blueprint,render_template,url_for,request
 from flask_login import login_required,current_user
 from main_app.models import User
 
@@ -14,7 +14,7 @@ def index():
 def account(username):
     user = User.query.filter_by(username = username).first()
     if user:
-        return f"welcome {user.name}"
+        return render_template("account.html")
     else :
         return "chal jaa bhosdike"
 

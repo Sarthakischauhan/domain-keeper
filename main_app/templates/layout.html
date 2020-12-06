@@ -13,8 +13,14 @@
         <div class="container">
             <h1 class="logo"><a href="/" id="logo-a">Domain-Keeper</a></h1>
             <ul class="links">
-                <li><a href="/login" class="link">Log in</a></li>
-                <li><a href="/signup" class="link">Sign Up</a></li>
+                {% if not current_user.is_authenticated %}
+                  <li><a href="/login" class="link">Log in</a></li>
+                  <li><a href="/signup" class="link">Sign Up</a></li>
+                {% else %}
+                  <li><a href="{{ url_for('routes_bp.account',_anchor='add-links',username=current_user.username ) }}" class="link">Add</a></li>
+                  <li><a href="{{ url_for('routes_bp.account',_anchor='my-links',username=current_user.username ) }}"class="link">My Links</a></li>
+                  <li><a href="/logout" class="link">Logout</a></li>
+                {% endif %}
             </ul>
         </div>
     </nav>
