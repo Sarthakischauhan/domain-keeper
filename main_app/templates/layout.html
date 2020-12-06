@@ -17,7 +17,7 @@
                   <li><a href="/login" class="link">Log in</a></li>
                   <li><a href="/signup" class="link">Sign Up</a></li>
                 {% else %}
-                  <li><a href="{{ url_for('routes_bp.account',_anchor='add-links',username=current_user.username ) }}" class="link">Add</a></li>
+                  <li><a href="" class="link">Add</a></li>
                   <li><a href="{{ url_for('routes_bp.account',_anchor='my-links',username=current_user.username ) }}"class="link">My Links</a></li>
                   <li><a href="/logout" class="link">Logout</a></li>
                 {% endif %}

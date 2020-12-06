@@ -1,6 +1,6 @@
 from main_app.ext import (db,login_manager)
 from flask_login import UserMixin
-
+from datetime import datetime
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -25,6 +25,7 @@ class Link(db.Model):
     id=db.Column(db.Integer,primary_key=True)
     user_link = db.Column(db.String(240),nullable=False)
     title =  db.Column(db.String(30),nullable=False)
+    date_added = db.Column(db.DateTime(20),nullable=False,default=datetime.now())
     description = db.Column(db.String(30))
     link_type =  db.Column(db.String(20),nullable=False)
     user_id = db.Column(db.Integer,db.ForeignKey('user.id'))
