@@ -1,6 +1,6 @@
-from flask import Blueprint,render_template,url_for,request
+from flask import Blueprint,render_template,url_for,request,abort
 from flask_login import login_required,current_user
-from main_app.models import User
+from main_app.models import User,Link
 
 routes_bp = Blueprint("routes_bp",__name__)
 
@@ -13,9 +13,12 @@ def index():
 @login_required
 def account(username):
     user = User.query.filter_by(username = username).first()
-    if user:
+    if user and user==current_user:
         return render_template("account.html")
-    else :
-        return "chal jaa bhosdike"
 
+    elif user != current_user:
+        return "wait for your turn asshole"
+
+    else :
+        abort(404)
 
