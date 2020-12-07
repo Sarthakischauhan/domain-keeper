@@ -13,6 +13,8 @@ def index():
 @login_required
 def account(username):
     user = User.query.filter_by(username = username).first()
+    secure_links = Link.query.filter_by(owner=current_user , link_type="protected")
+    links = Link.query.filter_by(owner=current_user)
     if user and user==current_user:
         return render_template("account.html")
 
