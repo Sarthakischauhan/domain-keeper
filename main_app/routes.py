@@ -13,14 +13,15 @@ def index():
 @login_required
 def account(username):
     user = User.query.filter_by(username = username).first()
-    secure_links = Link.query.filter_by(owner=current_user , link_type="protected")
-    links = Link.query.filter_by(owner=current_user)
-    if user and user==current_user:
-        return render_template("account.html")
-
-    elif user != current_user:
-        return "wait for your turn asshole"
-
+    if user :
+        links = Link.query.filter_by(owner=user).all()
+        secured_links = list(filter(lambda lnk : True if lnk.link_type=="protected" else False ,links))
+        ordinary_links = list(filter(lambda lnk : True if lnk.link_type!="protected" else False ,links))
     else :
         abort(404)
 
+    if user==current_user:
+        return render_template("account.html",links=links,secured_links=secured_links)
+
+    elif user != current_user:
+        return "wait for your turn asshole"

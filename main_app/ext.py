@@ -19,4 +19,4 @@ def success_rate():
             return False
         else :
             return True
-    return dict(success_or_not=success_or_not)
+    return dict(success_or_not=success_or_not,len=len)
