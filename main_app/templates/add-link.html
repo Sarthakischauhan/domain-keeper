@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block title %}
+Add | {{ current_user.username }}
+{% endblock %}
+
+{% block link %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='add-link.css') }}">
+{% endblock link %}
+
+
+{% block content %}
+<section class="add-link">
+    <div class="cnt-form">
+        <h1 id="add-head">ADD A LINK TO BE STORED</h1>
+        <form class="form" method="POST">
+            <label class="label">
+                Enter URL
+            </label>
+            <input type="URL" name="url" class="group">
+            <label class="label">
+                Enter Title
+            </label>
+            <input type="text" name="title" class="group">
+            <label class="label">
+                Select The link type
+            </label>
+            <select name="type" class="link_type">
+                <option value="normal">Normal</option>
+                <option value="youtube">Youtube</option>
+                <option value="protected">Protected</option>
+            </select>
+            <label class="label">
+                Enter A Description
+            </label>
+            <textarea class="textarea" name="desc" style="resize: none;"></textarea>
+            <input type="submit" name="" class="sub">
+        </form>
+    </div>
+</section>
+
+
+{% endblock %}

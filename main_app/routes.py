@@ -25,3 +25,10 @@ def account(username):
 
     elif user != current_user:
         return "wait for your turn asshole"
+
+
+
+@routes_bp.route("/add",methods=("GET","POST"))
+@login_required
+def add_link():
+    return render_template("add-link.html")
