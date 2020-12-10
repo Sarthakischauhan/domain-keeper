@@ -1,6 +1,9 @@
 from flask import Blueprint,render_template,url_for,request,abort
 from flask_login import login_required,current_user
 from main_app.models import User,Link
+import uuid
+from main_app.ext import bcrypt
+
 
 routes_bp = Blueprint("routes_bp",__name__)
 
@@ -31,4 +34,11 @@ def account(username):
 @routes_bp.route("/add",methods=("GET","POST"))
 @login_required
 def add_link():
+    if request.method == "POST":
+        url,salt= request.form["url"],uuid.uuid4().hex[0:7]
+        hashed_url = bcrypt.generate_password_hash(url+salt)
+        print(hashed_url)
+        print(request.form)
+
+
     return render_template("add-link.html")
