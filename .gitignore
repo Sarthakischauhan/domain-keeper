@@ -3,3 +3,5 @@ structure.txt
 __pycache__/
 Instance/
 bash-scrpt.sh
+secret.key
+key_generate.py
