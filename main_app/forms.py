@@ -6,7 +6,7 @@ from main_app.models import User
 
 
 class SignupForm(Form):
-    username=StringField("Username",validators=[DataRequired(),Length(min=2,max=15)])
+    username=StringField("Username",validators=[DataRequired(),Length(min=2,max=20)])
     name = StringField("Name",validators=[DataRequired(),Length(min=3,max=20)])
     email=StringField("Email",validators=[DataRequired(),Email()])
     password=PasswordField("Password",validators=[DataRequired(),Length(min=4,max=20,message="Password should be of 4 to 12 characters")])

@@ -1,9 +1,9 @@
-from flask import Blueprint,render_template,url_for,request,abort
+from flask import Blueprint,render_template,url_for,request,abort,redirect
 from flask_login import login_required,current_user
 from main_app.models import User,Link
-import uuid
+from cryptography.fernet import Fernet
 from main_app.ext import db
-
+from main_app import app
 
 routes_bp = Blueprint("routes_bp",__name__)
 
@@ -34,16 +34,18 @@ def account(username):
 @routes_bp.route("/add",methods=("GET","POST"))
 @login_required
 def add_link():
+    f=Fernet(app.config["ENCRYPTION_KEY"])
     if request.method == "POST":
-        url= request.form["url"]
-        link1=Link(user_link=hashed_url,
+        if request.form["link_type"]=="protected":
+            url= request.form["url"]
+            url = f.encrypt(url.encode())
+        link1=Link(user_link=url,
             title=request.form["title"],
-            link_salt=salt,
             link_type=request.form["type"],
             description=request.form["desc"],
-            owner=current_user
-            )
+            owner=current_user)
         db.session.add(link1)
         db.session.commit()
-
+        flash(f"{link_type.capitalize()} successfully added")
+        return redirect(url_for("routes_bp.account",username=current_user.username))
     return render_template("add-link.html")

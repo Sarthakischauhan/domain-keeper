@@ -15,6 +15,7 @@ class User(db.Model,UserMixin):
     password=db.Column(db.String(120),nullable=False,unique=True)
     email=db.Column(db.String(60),nullable=False,unique=True)
     name=db.Column(db.String(20),nullable=False)
+    salt=db.Column(db.String(6),nullable=False)
     links = db.relationship("Link",backref="owner",lazy=True)
 
     def __repr__(self):
@@ -27,7 +28,6 @@ class Link(db.Model):
     title =  db.Column(db.String(30),nullable=False)
     date_added = db.Column(db.DateTime(20),nullable=False,default=datetime.now())
     description = db.Column(db.String(30))
-    link_salt=db.Column(db.String(8),nullable=False)
     link_type =  db.Column(db.String(20),nullable=False)
     user_id = db.Column(db.Integer,db.ForeignKey('user.id'))
 

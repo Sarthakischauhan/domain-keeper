@@ -3,7 +3,7 @@ from main_app.forms import SignupForm,LoginForm
 from main_app.models import User
 from main_app.ext import (db , bcrypt)
 from flask_login import login_user,current_user,logout_user
-
+import uuid
 
 auth_bp = Blueprint("auth_bp",__name__)
 
@@ -19,8 +19,11 @@ def signup():
         return redirect(url_for("routes_bp.account",username = current_user.username))
     form = SignupForm()
     if form.validate_on_submit():
-        pass_hash = bcrypt.generate_password_hash(form.password.data)
-        user = User(username=form.username.data , email=form.email.data , password=pass_hash , name=form.name.data)
+        salt = uuid.uuid4().hex[0:6]
+        pass_hash = form.password.data + salt
+        print(pass_hash)
+        pass_hash = bcrypt.generate_password_hash(pass_hash)
+        user = User(username=form.username.data , email=form.email.data , password=pass_hash , name=form.name.data , salt=salt )
         db.session.add(user)
         db.session.commit()
         flash("Your Account Has Been Successfully Created")
@@ -37,7 +40,7 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
-        if user and bcrypt.check_password_hash(user.password,form.password.data):
+        if user and bcrypt.check_password_hash(user.password,(form.password.data + user.salt)):
             login_user(user,remember=form.remember.data)
             next_page = request.args.get("next")
             flash("Welcome.Login Successful")
