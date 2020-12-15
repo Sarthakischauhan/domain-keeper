@@ -18,13 +18,14 @@ def account(username):
     user = User.query.filter_by(username = username).first()
     if user :
         links = Link.query.filter_by(owner=user).all()
-        secured_links = list(filter(lambda lnk : True if lnk.link_type=="protected" else False ,links))
-        ordinary_links = list(filter(lambda lnk : True if lnk.link_type!="protected" else False ,links))
+        sec_links = list(filter(lambda lnk : True if lnk.link_type=="protected" else False ,links))
+        yt_links = list(filter(lambda lnk : True if lnk.link_type=="youtube" else False ,links))
+        links = list(filter(lambda lnk : True if lnk.link_type=="normal" else False ,links))
     else :
         abort(404)
 
     if user==current_user:
-        return render_template("account.html",links=links,secured_links=secured_links)
+        return render_template("account.html",links=links,sec_links=sec_links,yt_links=yt_links)
 
     elif user != current_user:
         return "wait for your turn asshole"
@@ -36,8 +37,8 @@ def account(username):
 def add_link():
     f=Fernet(app.config["ENCRYPTION_KEY"])
     if request.method == "POST":
+        url= request.form["url"]
         if request.form["type"]=="protected":
-            url= request.form["url"]
             url = f.encrypt(url.encode())
         link1=Link(user_link=url,
             title=request.form["title"],

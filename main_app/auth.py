@@ -7,12 +7,6 @@ import uuid
 
 auth_bp = Blueprint("auth_bp",__name__)
 
-
-@auth_bp.route("/auth/")
-def sample_auth():
-    return "This is a sample auth endpoint"
-
-
 @auth_bp.route("/signup",methods=["GET","POST"])
 def signup():
     if current_user.is_authenticated:

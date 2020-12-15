@@ -29,13 +29,28 @@
                 <h2 id="n-head">Total Links</h2>
             </span>
             <span class="n-set">
-                <h1 id="n-data">{{ len(secured_links) }}</h1>
+                <h1 id="n-data">{{ len(sec_links) }}</h1>
                 <h2 id="n-head">Protected Links</h2>
             </span>
         </div>
     </div>
-
 </section>
+<section class="all-links">
+
+    <div class="normal-links">
+        <h1>Normal Links</h1>
+        {% if links %}
+            {% for link in links %}
+                <div class="link-box">
+                    <h2>{{ link.title }}</h2>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    </div>
+</section>
+
 
 
 {% endblock %}
