@@ -36,19 +36,20 @@
     </div>
 </section>
 <section class="all-links">
-
-    <div class="normal-links">
-        <h1>Normal Links</h1>
-        {% if links %}
-            {% for link in links %}
-                <div class="link-box">
-                    <h2>{{ link.title }}</h2>
-                </div>
-            {% endfor %}
-        {% endif %}
-    </div>
-
-    </div>
+    {% if links %}
+        <div class="normal-link">
+            <h1 id="normal-head">Normal Links</h1>
+            <div class="normal-grid">
+                {% for link in links %}
+                    <div class="n-box">
+                        <h1>{{ link.title }}</h1>
+                        <a href="{{ link.user_link }}">{{ link.user_link }}</a>
+                        <p>{{ link.description }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
 </section>
 
 

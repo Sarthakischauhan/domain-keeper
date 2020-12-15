@@ -88,17 +88,31 @@
     position: absolute;
     top: 100vh;
     width: 100%;
+    background: rgba(230,230,255,0.21);
 }
 
-.normal-links{
+#normal-head{
+    font-size: 36px;
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+    margin-top: 35px;
+    font-family: monospace;
+    margin-bottom: 35px;
+}
+
+.normal-grid{
     width: 60%;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
+    grid-gap: 30px;
 }
 
-.link-box{
-    background: red;
+.n-box{
+    background: white;
+    text-align: center;
+    padding: 0 20px;
 }
 
 
