@@ -31,7 +31,7 @@
           {% if messages %}
             {% if success_or_not(messages) %}
               <div class="flash_box-green" id="flash_box-green">
-                <img src="{{ url_for('static',filename='default_imgs/cross.png') }}" id="cross_btn">
+                <img src="{{ url_for('static',filename='default_imgs/cross.png') }}" onclick="flashboxEnd()" id="cross_btn">
                 {% for message in messages %}
                   <div class="flash_msg_box">
                     <p id="flash_text">
@@ -42,7 +42,7 @@
               </div>
             {% else %}
               <div class="flash_box-red" id="flash_box-red">
-                <img src="{{ url_for('static',filename='default_imgs/cross.png') }}" id="cross_btn">
+                <img src="{{ url_for('static',filename='default_imgs/cross.png') }}" id="cross_btn" onclick="flashboxEnd()">
                 {% for message in messages %}
                   <div class="flash_msg_box">
                     <p id="flash_text">
@@ -56,4 +56,5 @@
         {% endwith %}
     </footer>
 </body>
+<script src="{{ url_for('static',filename='js/app.js') }}"></script>
 </html>
