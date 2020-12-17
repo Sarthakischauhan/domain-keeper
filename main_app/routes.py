@@ -38,10 +38,12 @@ def add_link():
     f=Fernet(app.config["ENCRYPTION_KEY"])
     if request.method == "POST":
         url= request.form["url"]
+        title = request.form["title"].strip().split()
+        title = '-'.join(title)
         if request.form["type"]=="protected":
             url = f.encrypt(url.encode())
         link1=Link(user_link=url,
-            title=request.form["title"],
+            title=title,
             link_type=request.form["type"],
             description=request.form["desc"],
             owner=current_user)

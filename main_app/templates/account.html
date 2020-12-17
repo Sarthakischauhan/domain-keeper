@@ -50,8 +50,12 @@
             {% if links %}
                 {% for link in links %}
                     <div class="link-box">
-                        <h1>{{ link.title }}</h1>
-                        <a href="{{ link.user_link }}" target="_blank">{{ link.user_link }}</a>
+                        <div class="box-head">
+                            <h1 id="box-head">{{ title_unfold(link.title) }}</h1>
+                        </div>
+                        <div class="box-link">
+                            <a href="{{ link.user_link }}" target="_blank">{{ link.user_link }}</a>
+                        </div>
                         <h3>{{ link.description }}</h3>
                     </div>
                 {% endfor %}
@@ -59,7 +63,5 @@
         </div>
     </div>
 </section>
-
-
 
 {% endblock %}

@@ -13,10 +13,20 @@ migrate = Migrate(app,db)
 login_manager.login_view = "auth_bp.login"
 
 @app.context_processor
-def success_rate():
+def push_to_templates():
     def success_or_not(messages):
         if "Unsuccessfull" in messages[0]:
             return False
         else :
             return True
-    return dict(success_or_not=success_or_not,len=len)
+
+    def title_unfold(title):
+        title = title.strip().split("-")
+        title = ' '.join(title)
+        return title
+
+    return dict(
+            success_or_not = success_or_not,
+            len = len,
+            title_unfold = title_unfold,
+            )
