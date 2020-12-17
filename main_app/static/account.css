@@ -139,7 +139,7 @@
 
 }
 
-.normal-link{
+.normal-link,.secure-link{
     margin-top: 40px;
     display: grid;
     grid-row-gap: : 20px;
@@ -149,12 +149,16 @@
     grid-template-columns: repeat(auto-fill, minmax(270px, 0.5fr));
 }
 
+.secure-link{
+    display: none;
+}
 
 .link-box{
     border-radius: 30px;
     box-shadow: 2px 6px 20px 1px rgba(88,81,219,0.35);
     height: 450px;
     margin-bottom: 50px;
+    background: #F9FAFB;
 }
 /*rgba(0,0,0,0.55)*/
 
@@ -175,20 +179,51 @@
     padding: 0px 5px;
     text-overflow: ellipsis;
     white-space: nowrap;
-    overflow: hidden;
+}
+
+.box-link{
+    display: flex;
+    height: 150px;
+    flex-direction: column;
+    word-break: break-all;
+    margin-top: 20px;
+}
+
+#box-link{
+    text-align: center;
+}
+
+#box-link-head,#box-note-head{
+    font-size: 25px;
+    font-weight: bold;
+    font-family: sans-serif;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-right: 5px;
+}
+
+.box-note{
+    margin-top: 10px;
+    overflow-y: auto;
+}
+
+#box-note{
+    text-align: center;
+    margin: 0px 10px;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 
+#goto{
+    margin-top: 20px;
+    width: 70px;
+}
 
-
-
-
-
-
-
-
-
-
+#goto:hover{
+    transform: scale(1.1);
+    fill: blue;
+}
 
 
 
@@ -214,8 +249,18 @@
     .n-set{
         width: 40%;
     }
+
 }
 
+
+@media only screen and (max-width: 1044px) {
+    .container1,.container2{
+        width: 70%;
+    }
+    .box-note{
+        margin-top: 15px;
+    }
+}
 
 
 @media only screen and (max-width: 865px) {

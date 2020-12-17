@@ -24,10 +24,10 @@ class User(db.Model,UserMixin):
 
 class Link(db.Model):
     id=db.Column(db.Integer,primary_key=True)
-    user_link = db.Column(db.String(240),nullable=False)
-    title =  db.Column(db.String(30),nullable=False)
+    user_link = db.Column(db.String(1200),nullable=False)
+    title =  db.Column(db.String(25),nullable=False)
     date_added = db.Column(db.DateTime(20),nullable=False,default=datetime.now())
-    description = db.Column(db.String(30))
+    description = db.Column(db.String(60))
     link_type =  db.Column(db.String(20),nullable=False)
     user_id = db.Column(db.Integer,db.ForeignKey('user.id'))
 

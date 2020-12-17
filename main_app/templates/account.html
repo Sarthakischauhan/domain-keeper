@@ -54,9 +54,36 @@
                             <h1 id="box-head">{{ title_unfold(link.title) }}</h1>
                         </div>
                         <div class="box-link">
-                            <a href="{{ link.user_link }}" target="_blank">{{ link.user_link }}</a>
+                            <h2 id="box-link-head">Go To</h2>
+                            <a href="{{ link.user_link }}" target="_blank" id="box-link">
+                                <img src="{{ url_for('static',filename='default_imgs/launch.svg') }}" id="goto">
+                            </a>
                         </div>
-                        <h3>{{ link.description }}</h3>
+                        <div class="box-note">
+                            <h2 id="box-note-head">Notes</h2>
+                            <pre id="box-note" >{{ link.description }}</pre>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="secure-link">
+            {% if sec_links %}
+                {% for link in sec_links %}
+                    <div class="link-box">
+                        <div class="box-head">
+                            <h1 id="box-head">{{ title_unfold(link.title) }}</h1>
+                        </div>
+                        <div class="box-link">
+                            <h2 id="box-link-head">Go To</h2>
+                            <a href="{{ link.user_link }}" target="_blank" id="box-link">
+                                <img src="{{ url_for('static',filename='default_imgs/launch.svg') }}">
+                            </a>
+                        </div>
+                        <div class="box-note">
+                            <h2 id="box-note-head">Notes</h2>
+                            <pre id="box-note" >{{ link.description }}</pre>
+                        </div>
                     </div>
                 {% endfor %}
             {% endif %}
