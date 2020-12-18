@@ -16,16 +16,20 @@ def index():
 @login_required
 def account(username):
     user = User.query.filter_by(username = username).first()
+    page=request.args.get("page",1,type=int)
+    len_links = [ len(Link.query.filter_by(owner=user,link_type="normal").all()),
+                len(Link.query.filter_by(owner=user,link_type="protected").all()),
+                len(Link.query.filter_by(owner=user,link_type="youtube").all())
+                ]
     if user :
-        links = Link.query.filter_by(owner=user).all()
-        sec_links = list(filter(lambda lnk : True if lnk.link_type=="protected" else False ,links))
-        yt_links = list(filter(lambda lnk : True if lnk.link_type=="youtube" else False ,links))
-        links = list(filter(lambda lnk : True if lnk.link_type=="normal" else False ,links))
+        links = Link.query.filter_by(owner=user,link_type="normal").order_by(Link.date_added.desc()).paginate(page=page,per_page=6)
+        sec_links = Link.query.filter_by(owner=user,link_type="protected").order_by(Link.date_added.desc()).paginate(page=page,per_page=6)
+        yt_links =  Link.query.filter_by(owner=user,link_type="youtube").order_by(Link.date_added.desc()).paginate(page=page,per_page=6)
     else :
         abort(404)
 
     if user==current_user:
-        return render_template("account.html",links=links,sec_links=sec_links,yt_links=yt_links)
+        return render_template("account.html",links=links,sec_links=sec_links,yt_links=yt_links,len_links=len_links)
 
     elif user != current_user:
         return "wait for your turn asshole"

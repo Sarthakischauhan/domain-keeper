@@ -156,7 +156,7 @@
 .link-box{
     border-radius: 30px;
     box-shadow: 2px 6px 20px 1px rgba(88,81,219,0.35);
-    height: 450px;
+    height: 500px;
     margin-bottom: 50px;
     background: #F9FAFB;
 }
@@ -177,8 +177,7 @@
     font-weight: bold;
     font-family: monospace;
     padding: 0px 5px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    word-break: break-all;
 }
 
 .box-link{
@@ -212,6 +211,8 @@
     margin: 0px 10px;
     font-size: 15px;
     font-weight: bold;
+    word-break: break-word;
+    white-space: normal;
 }
 
 
