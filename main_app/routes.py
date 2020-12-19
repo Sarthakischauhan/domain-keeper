@@ -22,7 +22,7 @@ def account(username):
                     len(Link.query.filter_by(owner=user,link_type="protected").all()),
                     len(Link.query.filter_by(owner=user,link_type="youtube").all()),
                     ]
-        links = Link.query.filter_by(owner=user,link_type="normal").order_by(Link.date_added.desc()).paginate(page=page,per_page=3)
+        links = Link.query.filter_by(owner=user,link_type="normal").order_by(Link.date_added.desc()).paginate(page=page,per_page=4)
     else :
         abort(404)
 
@@ -57,3 +57,13 @@ def add_link():
         return redirect(url_for("routes_bp.account",username=current_user.username))
 
     return render_template("add-link.html")
+
+
+
+@routes_bp.route("/yt")
+@login_required
+def youtube():
+    return """<iframe width="560" height="315" src="https://www.youtube.com/embed/xsEXpzsLsc0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>"""
+
+
+

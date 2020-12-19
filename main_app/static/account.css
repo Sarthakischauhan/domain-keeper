@@ -177,7 +177,7 @@
     font-weight: bold;
     font-family: monospace;
     padding: 0px 5px;
-    word-break: break-all;
+    word-break: break-word;
 }
 
 .box-link{
@@ -204,6 +204,7 @@
 .box-note{
     margin-top: 10px;
     overflow-y: auto;
+    height: 100px;
 }
 
 #box-note{
@@ -244,9 +245,14 @@
     text-decoration: none;
     padding: 5px 10px;
     font-size: 16px;
-    background: rgb(88,81,219);
+    background: #0095f6;
     color: white;
     border-radius: 6px;
+    font-weight: bold;
+}
+
+.current-num{
+    background: #40c463;
 }
 
 
@@ -261,128 +267,3 @@
 
 
 
-
-
-@media only screen and (max-width: 1550px) {
-    .n-set{
-        width: 40%;
-    }
-
-}
-
-
-@media only screen and (max-width: 1044px) {
-    .container1,.container2{
-        width: 70%;
-    }
-    .box-note{
-        margin-top: 15px;
-    }
-}
-
-
-@media only screen and (max-width: 865px) {
-    .n-set{
-        width: 45%;
-    }
-}
-
-
-
-@media only screen and (max-width: 768px) {
-    #acc-username{
-        font-size: 32px;
-    }
-    #acc-name{
-        font-size: 17px;
-    }
-    #sec1-heading{
-        font-size: 32px;
-    }
-    #n-head{
-        font-size: 25px;
-    }
-    #n-data{
-        font-size: 80px;
-    }
-
-}
-
-
-@media only screen and (max-width: 650px) {
-    .n-set{
-        width: 50%;
-    }
-}
-
-
-@media only screen and (max-width: 550px) {
-    #acc-username{
-        font-size: 27px;
-    }
-    #acc-name{
-        font-size: 15px;
-    }
-    #avatar-img{
-        width: 150px;
-    }
-    #n-head{
-        font-size: 20px;
-    }
-    #n-data{
-        font-size: 60px;
-    }
-    #sec1-heading{
-        font-size: 28px;
-    }
-    .stats-data{
-        margin-top: 40px;
-    }
-
-
-}
-
-@media only screen and (max-width: 450px) {
-    #acc-username{
-        font-size: 23px;
-    }
-    #acc-name{
-        font-size: 14px;
-    }
-    #avatar-img{
-        width: 120px;
-    }
-    #n-head{
-        font-size: 18px;
-    }
-    #n-data{
-        font-size: 40px;
-    }
-    .n-set{
-        width: 60%;
-    }
-    #sec1-heading{
-        font-size: 25px;
-    }
-
-}
-
-
-@media only screen and (max-width: 450px) {
-    #sec1-heading{
-        font-size: 20px;
-    }
-    #n-head{
-        font-size: 16px;
-    }
-    #n-data{
-        font-size: 35px;
-    }
-    .stats-data{
-        margin-top: 25px;
-    }
-    .user-data{
-        margin-top: 50px;
-    }
-
-}
