@@ -71,26 +71,22 @@
                 {% endfor %}
             {% endif %}
         </div>
-        <div class="secure-link">
-            {% if sec_links.items %}
-                {% for link in sec_links.items %}
-                    <div class="link-box">
-                        <div class="box-head">
-                            <h1 id="box-head">{{ title_unfold(link.title) }}</h1>
-                        </div>
-                        <div class="box-link">
-                            <h2 id="box-link-head">Go To</h2>
-                            <a href="{{ link.user_link }}" target="_blank" id="box-link">
-                                <img src="{{ url_for('static',filename='default_imgs/launch.svg') }}">
-                            </a>
-                        </div>
-                        <div class="box-note">
-                            <h2 id="box-note-head">Notes</h2>
-                            <pre id="box-note" >{{ link.description }}</pre>
-                        </div>
-                    </div>
+
+        <div class="page-links">
+            <div class="normal-pages">
+                {% for page_num in links.iter_pages() %}
+                    {% if page_num %}
+                        {% if links.page==page_num %}
+                            <a href="{{url_for('routes_bp.account',page=page_num,username=current_user.username,_anchor='indicator')}}" class="current-num">{{ page_num }}</a>
+                        {% else %}
+                            <a href="{{url_for('routes_bp.account',page=page_num,username=current_user.username,_anchor='indicator')}}" class="page-num">{{ page_num }}</a>
+                    {% endif %}
+
+                    {% else %}
+                        ...
+                    {% endif %}
+
                 {% endfor %}
-            {% endif %}
         </div>
     </div>
 </section>

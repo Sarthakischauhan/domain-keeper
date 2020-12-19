@@ -227,10 +227,27 @@
 }
 
 
+.page-links{
+    margin-top: 30px;
+    width: 100%;
+}
+.normal-pages{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 50px;
+}
 
 
-
-
+.current-num,.page-num{
+    margin: 0 10px;
+    text-decoration: none;
+    padding: 5px 10px;
+    font-size: 16px;
+    background: rgb(88,81,219);
+    color: white;
+    border-radius: 6px;
+}
 
 
 

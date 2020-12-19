@@ -27,6 +27,5 @@ def push_to_templates():
 
     return dict(
             success_or_not = success_or_not,
-            len = len,
             title_unfold = title_unfold,
             )
