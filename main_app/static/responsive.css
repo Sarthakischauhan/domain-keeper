@@ -1,0 +1,255 @@
+
+
+@media only screen and (max-width: 1550px) {
+    .n-set{
+        width: 40%;
+    }
+
+}
+
+
+@media only screen and (max-width: 1044px) {
+    .container1,.container2{
+        width: 70%;
+    }
+    .box-note{
+        margin-top: 15px;
+    }
+}
+
+
+@media only screen and (max-width: 890px) {
+    .n-set{
+        width: 45%;
+    }
+    .link-box{
+        height: 480px;
+    }
+    .container2,.container1{
+        width: 75%;
+    }
+    .normal-link{
+        grid-column-gap: 40px;
+    }
+}
+
+
+
+@media only screen and (max-width: 774px) {
+    #acc-username{
+        font-size: 32px;
+    }
+    #acc-name{
+        font-size: 17px;
+    }
+    #sec1-heading{
+        font-size: 32px;
+    }
+    #n-head{
+        font-size: 25px;
+    }
+    #n-data{
+        font-size: 80px;
+    }
+    .container2,.container1{
+        width: 85%;
+    }
+    #head{
+        font-size: 32px;
+    }
+    .sec-nav{
+        font-size: 15px;
+        font-weight: bold;
+        margin: 0 10px;
+    }
+    .sec-link{
+        padding: 6px 0 ;
+    }
+    #indicator{
+        font-size: 27px;
+    }
+}
+
+@media only screen and (max-width: 688px) {
+    .box-head{
+        height: 120px;
+    }
+    .link-box{
+        height: 390px;
+    }
+    #goto{
+        width: 55px;
+    }
+    .box-note{
+        margin-top: 15px;
+    }
+    .box-link{
+        height: 120px;
+    }
+    #box-link-head, #box-note-head {
+        font-size: 23px;
+    }
+    .normal-link{
+        grid-template-columns: repeat(auto-fill, minmax(220px, 0.5fr));
+    }
+    #box-head{
+        font-size: 17px;
+    }
+}
+
+
+@media only screen and (max-width: 650px) {
+    .n-set{
+        width: 50%;
+    }
+}
+
+
+@media only screen and (max-width: 565px) {
+    #acc-username{
+        font-size: 27px;
+    }
+    #acc-name{
+        font-size: 15px;
+    }
+    #avatar-img{
+        width: 150px;
+    }
+    #n-head{
+        font-size: 20px;
+    }
+    #n-data{
+        font-size: 60px;
+    }
+    #sec1-heading{
+        font-size: 28px;
+    }
+    .stats-data{
+        margin-top: 40px;
+    }
+    #head{
+        font-size: 28px;
+    }
+    .box-head{
+        height: 90px;
+    }
+    .link-box{
+        height: 340px;
+    }
+    #goto{
+        margin-top: 20px;
+        width: 40px;
+    }
+    .box-note{
+        margin-top: 5px;
+    }
+    .box-link{
+        height: 100px;
+        margin-top: 5px;
+    }
+    #box-link-head, #box-note-head {
+        font-size: 15px;
+        margin-top: 5px;
+    }
+    .normal-link{
+        grid-template-columns: repeat(auto-fill, minmax(200px, 0.5fr));
+    }
+    #box-head{
+        font-size: 15px;
+    }
+    #box-note{
+        font-size: 13px;
+    }
+    #indicator{
+        font-size: 25px;
+    }
+    .all-links{
+        margin-top: 70px;
+    }
+    .sec-nav{
+        font-size: 12px;
+    }
+
+}
+
+
+@media only screen and (max-width: 518px) {
+    .normal-link{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .link-box{
+        width: 70%;
+        height: 300px;
+    }
+    .container2, .container1 {
+        width: 75%;
+    }
+    .box-note{
+        height: 80px;
+    }
+
+
+
+}
+
+
+@media only screen and (max-width: 450px) {
+    #acc-username{
+        font-size: 23px;
+    }
+    #acc-name{
+        font-size: 14px;
+    }
+    #avatar-img{
+        width: 120px;
+    }
+    #n-head{
+        font-size: 18px;
+    }
+    #n-data{
+        font-size: 40px;
+    }
+    .n-set{
+        width: 60%;
+    }
+    #sec1-heading{
+        font-size: 25px;
+    }
+    .link-box{
+        width: 80%;
+    }
+
+    #head{
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+    #indicator{
+        margin-bottom: 20px;
+        font-size: 23px;
+    }
+
+}
+
+
+@media only screen and (max-width: 450px) {
+    #sec1-heading{
+        font-size: 20px;
+    }
+    #n-head{
+        font-size: 16px;
+    }
+    #n-data{
+        font-size: 35px;
+    }
+    .stats-data{
+        margin-top: 25px;
+    }
+    .user-data{
+        margin-top: 50px;
+    }
+
+}
+
+
