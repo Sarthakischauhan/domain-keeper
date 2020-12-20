@@ -68,6 +68,11 @@
                             <h2 id="box-note-head">Notes</h2>
                             <pre id="box-note" >{{ link.description }}</pre>
                         </div>
+                        <div class="delete-link">
+                            <a href="{{ url_for('routes_bp.delete_link',linkID=link.id) }}">
+                                <img src="{{ url_for('static',filename='default_imgs/delete.svg') }}" id="delete-link" href>
+                            </a>
+                        </div>
                     </div>
                 {% endfor %}
             {% endif %}

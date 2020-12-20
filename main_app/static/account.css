@@ -255,6 +255,15 @@
     background: #40c463;
 }
 
+.delete-link{
+    width: 100%;
+    text-align: center;
+    padding-top: 4px;
+}
+
+#delete-link{
+    width: 25px;
+}
 
 
 

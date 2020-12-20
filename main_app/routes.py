@@ -60,10 +60,22 @@ def add_link():
 
 
 
+
+@routes_bp.route("/<int:linkID>/delete",methods=('GET','POST'))
+def delete_link(linkID):
+    link=Link.query.get(linkID)
+    if link.owner==current_user:
+        db.session.delete(link)
+        db.session.commit()
+        return redirect(url_for('routes_bp.account',username=current_user.username))
+    else :
+        abort(403)
+
+
+
 @routes_bp.route("/yt")
 @login_required
 def youtube():
-    return """<iframe width="560" height="315" src="https://www.youtube.com/embed/xsEXpzsLsc0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>"""
-
+    return b"sarthak is chauhan"
 
 

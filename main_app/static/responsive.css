@@ -219,6 +219,11 @@
     }
     .link-box{
         width: 80%;
+        height: 320px;
+    }
+
+    #delete-link{
+        width: 20px;
     }
 
     #head{
