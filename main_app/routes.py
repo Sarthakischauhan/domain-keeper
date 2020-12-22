@@ -4,6 +4,9 @@ from main_app.models import User,Link
 from cryptography.fernet import Fernet
 from main_app.ext import db
 from main_app import app
+import qrcode
+from io import BytesIO
+import base64
 
 routes_bp = Blueprint("routes_bp",__name__)
 
@@ -62,6 +65,7 @@ def add_link():
 
 
 @routes_bp.route("/<int:linkID>/delete",methods=('GET','POST'))
+@login_required
 def delete_link(linkID):
     link=Link.query.get(linkID)
     if link.owner==current_user:
@@ -70,6 +74,34 @@ def delete_link(linkID):
         return redirect(url_for('routes_bp.account',username=current_user.username))
     else :
         abort(403)
+
+
+
+
+
+
+@routes_bp.route("/<string:title>/qr")
+@routes_bp.route("/<int:linkID>/qr")
+@login_required
+def generate_qr(linkID="",title=""):
+    if title:
+        link=Link.query.filter_by(owner=current_user,title=title).first()
+    elif linkID:
+        link=Link.query.get(linkID)
+
+    if link:
+        if link.link_type != "protected":
+            img=qrcode.make(link.user_link)
+            byte_for_img=BytesIO()
+            img.save(byte_for_img,format="png")
+            b_img=base64.b64encode(byte_for_img.getvalue()).decode('utf-8')
+            return render_template("qr.html",b_img=b_img)
+    else :
+        abort(404)
+
+
+
+
 
 
 
