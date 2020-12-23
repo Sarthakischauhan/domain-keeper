@@ -70,7 +70,10 @@
                         </div>
                         <div class="delete-link">
                             <a href="{{ url_for('routes_bp.delete_link',linkID=link.id) }}">
-                                <img src="{{ url_for('static',filename='default_imgs/delete.svg') }}" id="delete-link" href>
+                                <img src="{{ url_for('static',filename='default_imgs/delete.svg') }}" id="delete-link">
+                            </a>
+                            <a href="{{ url_for('routes_bp.generate_qr',linkID=link.id) }}">
+                                <img src="{{ url_for('static',filename='default_imgs/qr-code.svg') }}" id="qr-link">
                             </a>
                         </div>
                     </div>
