@@ -263,6 +263,7 @@
 
 #delete-link,#qr-link{
     width: 25px;
+    margin-top:5px;
     margin-left: 10px;
     margin-right: 10px;
     filter: drop-shadow(0px 0px 2px #000);

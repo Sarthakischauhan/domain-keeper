@@ -25,7 +25,7 @@ def account(username):
                     len(Link.query.filter_by(owner=user,link_type="protected").all()),
                     len(Link.query.filter_by(owner=user,link_type="youtube").all()),
                     ]
-        links = Link.query.filter_by(owner=user,link_type="normal").order_by(Link.date_added.desc()).paginate(page=page,per_page=4)
+        links = Link.query.filter_by(owner=user,link_type="normal").order_by(Link.id.desc()).paginate(page=page,per_page=6)
     else :
         abort(404)
 
