@@ -108,6 +108,7 @@ def generate_qr(linkID="",title=""):
 @routes_bp.route("/yt")
 @login_required
 def youtube():
-    return b"This is a test actually"
+    return b"I am sorry that was a mistake"
+
 
 
