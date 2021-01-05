@@ -1,4 +1,4 @@
-from flask import Blueprint,render_template,url_for,request,abort,redirect,flash
+from flask import Blueprint,render_template,url_for,request,abort,redirect,flash,jsonify
 from flask_login import login_required,current_user
 from main_app.models import User,Link
 from cryptography.fernet import Fernet
@@ -21,10 +21,9 @@ def account(username):
     user = User.query.filter_by(username = username).first()
     if user :
         page=request.args.get("page",1,type=int)
-        len_links = [ len(Link.query.filter_by(owner=user,link_type="normal").all()),
+        len_links = [len(Link.query.filter_by(owner=user,link_type="normal").all()),
                     len(Link.query.filter_by(owner=user,link_type="protected").all()),
-                    len(Link.query.filter_by(owner=user,link_type="youtube").all()),
-                    ]
+                    len(Link.query.filter_by(owner=user,link_type="youtube").all()),]
         links = Link.query.filter_by(owner=user,link_type="normal").order_by(Link.id.desc()).paginate(page=page,per_page=6)
     else :
         abort(404)
@@ -34,6 +33,32 @@ def account(username):
 
     elif user != current_user:
         return "wait for your turn asshole"
+
+
+def getlinkData(link_type=None):
+	if not link_type:
+	    raise ValueError("Specify The Link Type")
+	elif link_type in ("normal","youtube","protected"):
+	    page = request.args.get("page",1,type=int)
+	    if link_type != "protected":
+		    links = Link.query.filter_by(owner=current_user,link_type=link_type).order_by(Link.id.desc()).paginate(page=page,per_page=6)
+		    links = links.items
+	    else :
+		    links = Link.query.filter_by(owner=current_user,link_type="protected").order_by(Link.id.desc()).paginate(page=page,per_page=6)
+		    f=Fernet(app.config["ENCRYPTION_KEY"])
+		    links,length = links.items , len(links.items)
+		    for i in range(length):
+			    element=links[i].user_link
+			    links[i].user_link = f.decrypt(element.encode())
+	    return links
+	else :
+		raise ValueError("Not known")
+
+@routes_bp.route("/getdata")
+@login_required
+def sendData():
+    links=getlinkData(link_type="protected")
+    return "This will actually send data"
 
 
 
@@ -76,10 +101,6 @@ def delete_link(linkID):
         abort(403)
 
 
-
-
-
-
 @routes_bp.route("/<string:title>/qr")
 @routes_bp.route("/<int:linkID>/qr")
 @login_required
@@ -98,17 +119,5 @@ def generate_qr(linkID="",title=""):
             return render_template("qr.html",b_img=b_img)
     else :
         abort(404)
-
-
-
-
-
-
-
-@routes_bp.route("/yt")
-@login_required
-def youtube():
-    return b"I am sorry that was a mistake"
-
 
 
