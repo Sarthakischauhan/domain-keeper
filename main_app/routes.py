@@ -19,15 +19,14 @@ def index():
 @login_required
 def account(username):
     user = User.query.filter_by(username = username).first()
-    if user :
+    if user:
         page=request.args.get("page",1,type=int)
         len_links = [len(Link.query.filter_by(owner=user,link_type="normal").all()),
                     len(Link.query.filter_by(owner=user,link_type="protected").all()),
                     len(Link.query.filter_by(owner=user,link_type="youtube").all()),]
         links = Link.query.filter_by(owner=user,link_type="normal").order_by(Link.id.desc()).paginate(page=page,per_page=6)
-    else :
+    else:
         abort(404)
-
     if user==current_user:
         return render_template("account.html",links=links,len_links=len_links)
 
@@ -36,14 +35,14 @@ def account(username):
 
 
 def getlinkData(link_type=None):
-	if not link_type:
+    if not link_type:
 	    raise ValueError("Specify The Link Type")
-	elif link_type in ("normal","youtube","protected"):
+    elif link_type in ("normal","youtube","protected"):
 	    page = request.args.get("page",1,type=int)
 	    if link_type != "protected":
 		    links = Link.query.filter_by(owner=current_user,link_type=link_type).order_by(Link.id.desc()).paginate(page=page,per_page=6)
 		    links = links.items
-	    else :
+	    else:
 		    links = Link.query.filter_by(owner=current_user,link_type="protected").order_by(Link.id.desc()).paginate(page=page,per_page=6)
 		    f=Fernet(app.config["ENCRYPTION_KEY"])
 		    links,length = links.items , len(links.items)
@@ -51,8 +50,8 @@ def getlinkData(link_type=None):
 			    element=links[i].user_link
 			    links[i].user_link = f.decrypt(element.encode())
 	    return links
-	else :
-		raise ValueError("Not known")
+    else:
+	    raise ValueError("Not known")
 
 @routes_bp.route("/getdata")
 @login_required
@@ -97,7 +96,7 @@ def delete_link(linkID):
         db.session.delete(link)
         db.session.commit()
         return redirect(url_for('routes_bp.account',username=current_user.username))
-    else :
+    else:
         abort(403)
 
 
@@ -109,15 +108,43 @@ def generate_qr(linkID="",title=""):
         link=Link.query.filter_by(owner=current_user,title=title).first()
     elif linkID:
         link=Link.query.get(linkID)
-
     if link:
+        f=Fernet(app.config["ENCRYPTION_KEY"])
         if link.link_type != "protected":
-            img=qrcode.make(link.user_link)
-            byte_for_img=BytesIO()
-            img.save(byte_for_img,format="png")
-            b_img=base64.b64encode(byte_for_img.getvalue()).decode('utf-8')
-            return render_template("qr.html",b_img=b_img)
-    else :
+            user_link = link.user_link
+        elif link.link_type == "protected":
+            user_link = f.decrypt(link.user_link.encode())
+        img=qrcode.make(user_link)
+        byte_for_img=BytesIO()
+        img.save(byte_for_img,format="png")
+        b_img=base64.b64encode(byte_for_img.getvalue()).decode('utf-8')
+        return render_template("qr.html",b_img=b_img)
+    else:
         abort(404)
 
+
+
+@routes_bp.route("/<string:title>/yt")
+@routes_bp.route("/<int:linkID>/yt")
+@login_required
+def yt_player(linkID="",title=""):
+    if title:
+        link=Link.query.filter_by(owner=current_user,title=title).first()
+    elif linkID:
+        link=Link.query.get(linkID)
+    if link:
+        if link.link_type == "youtube":
+            user_link = link.user_link
+        else:
+            flash("Unsuccessful Launch.Not a Youtube type link")
+            return redirect(url_for("routes_bp.account",username=current_user.username))
+        link_id = user_link.split("v=")[1]
+        if "#t" in user_link:
+            link_time = user_link.split("#t")[1]
+            embed = f"https://www.youtube.com/embed/{link_id}#t={link_time}"
+        else:
+            embed =f"https://www.youtube.com/embed/{link_id}"
+        return render_template("yt.html",embed=embed)
+    else:
+        abort(404)
 
