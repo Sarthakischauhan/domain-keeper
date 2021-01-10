@@ -34,11 +34,10 @@ def account(username):
         return "wait for your turn asshole"
 
 
-def getlinkData(link_type=None):
+def getlinkData(link_type=None,page=1):
     if not link_type:
 	    raise ValueError("Specify The Link Type")
     elif link_type in ("normal","youtube","protected"):
-	    page = request.args.get("page",1,type=int)
 	    if link_type != "protected":
 		    links = Link.query.filter_by(owner=current_user,link_type=link_type).order_by(Link.id.desc()).paginate(page=page,per_page=6)
 		    links = links.items
@@ -53,11 +52,25 @@ def getlinkData(link_type=None):
     else:
 	    raise ValueError("Not known")
 
-@routes_bp.route("/getdata")
+@routes_bp.route("/data/<string:v>",methods=["POST"])
 @login_required
-def sendData():
-    links=getlinkData(link_type="protected")
-    return "This will actually send data"
+def sendData(v):
+    if v in ("youtube","protected","normal"):
+        links=getlinkData(link_type=v)
+        ids=[link.id for link in links]
+        url=[link.user_link for link in links]
+        titles=[link.title for link in links]
+        desc=[link.description for link in links]
+        return jsonify(
+				{
+				   "id":ids,
+				   "urls":url,
+				   "titles":titles,
+				   "descriptions":desc
+				}
+		)
+    else:
+        abort(404)
 
 
 
@@ -148,3 +161,8 @@ def yt_player(linkID="",title=""):
     else:
         abort(404)
 
+
+
+@app.context_processor
+def data_template():
+	return dict(getlinkData=getlinkData)
