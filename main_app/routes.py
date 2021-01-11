@@ -21,14 +21,15 @@ def account(username):
     user = User.query.filter_by(username = username).first()
     if user:
         page=request.args.get("page",1,type=int)
+        v=request.args.get("v","normal",type=str)
+        assert v in ("normal","protected","youtube"),abort(404)
         len_links = [len(Link.query.filter_by(owner=user,link_type="normal").all()),
                     len(Link.query.filter_by(owner=user,link_type="protected").all()),
                     len(Link.query.filter_by(owner=user,link_type="youtube").all()),]
-        links = Link.query.filter_by(owner=user,link_type="normal").order_by(Link.id.desc()).paginate(page=page,per_page=6)
     else:
         abort(404)
     if user==current_user:
-        return render_template("account.html",links=links,len_links=len_links)
+        return render_template("account.html",len_links=len_links,v=v,page=page)
 
     elif user != current_user:
         return "wait for your turn asshole"
@@ -38,41 +39,10 @@ def getlinkData(link_type=None,page=1):
     if not link_type:
 	    raise ValueError("Specify The Link Type")
     elif link_type in ("normal","youtube","protected"):
-	    if link_type != "protected":
-		    links = Link.query.filter_by(owner=current_user,link_type=link_type).order_by(Link.id.desc()).paginate(page=page,per_page=6)
-		    links = links.items
-	    else:
-		    links = Link.query.filter_by(owner=current_user,link_type="protected").order_by(Link.id.desc()).paginate(page=page,per_page=6)
-		    f=Fernet(app.config["ENCRYPTION_KEY"])
-		    links,length = links.items , len(links.items)
-		    for i in range(length):
-			    element=links[i].user_link
-			    links[i].user_link = f.decrypt(element.encode())
-	    return links
+        links = Link.query.filter_by(owner=current_user,link_type=link_type).order_by(Link.id.desc()).paginate(page=page,per_page=6)
+        return links
     else:
 	    raise ValueError("Not known")
-
-@routes_bp.route("/data/<string:v>",methods=["POST"])
-@login_required
-def sendData(v):
-    if v in ("youtube","protected","normal"):
-        links=getlinkData(link_type=v)
-        ids=[link.id for link in links]
-        url=[link.user_link for link in links]
-        titles=[link.title for link in links]
-        desc=[link.description for link in links]
-        return jsonify(
-				{
-				   "id":ids,
-				   "urls":url,
-				   "titles":titles,
-				   "descriptions":desc
-				}
-		)
-    else:
-        abort(404)
-
-
 
 @routes_bp.route("/add",methods=("GET","POST"))
 @login_required
@@ -165,4 +135,9 @@ def yt_player(linkID="",title=""):
 
 @app.context_processor
 def data_template():
-	return dict(getlinkData=getlinkData)
+    f=Fernet(app.config["ENCRYPTION_KEY"])
+    def decrypt(val):
+        val=val.encode()
+        val=f.decrypt(val).decode()
+        return val
+    return dict(getlinkData=getlinkData,decrypt=decrypt)

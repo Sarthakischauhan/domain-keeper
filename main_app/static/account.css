@@ -105,19 +105,17 @@
     width: 100%;
     padding: 10px 0;
     border-bottom: 2px black solid;
-}
-
-#sec-link1{
-    color: rgb(88,81,219);
-}
-
-.sec-nav{
-    margin: 0 20px;
     list-style: none;
+}
+
+.sec-nav a{
+    margin: 0 20px;
+    text-decoration: none;
     font-size: 18px;
     font-weight: 500;
     font-family: sans-serif;
     cursor: pointer;
+    color: black;
 }
 
 

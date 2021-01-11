@@ -44,15 +44,21 @@
     <h1 id="head">Your Links With Us</h1>
     <div class="container1">
         <ul class="sec-link">
-            <li class="sec-nav" id="sec-link1">Normal</li>
-            <li class="sec-nav" id="sec-link2">Youtube</li>
-            <li class="sec-nav" id="sec-link3">Secured</li>
+            <li class="sec-nav" id="sec-link1">
+                <a href="{{url_for('routes_bp.account',v='normal',username=current_user.username,_anchor='indicator')}}">Normal</a>
+            </li>
+            <li class="sec-nav" id="sec-link2">
+                <a href="{{url_for('routes_bp.account',v='youtube',username=current_user.username,_anchor='indicator')}}">Youtube</a>
+            </li>
+            <li class="sec-nav" id="sec-link3">
+                <a href="{{url_for('routes_bp.account',v='protected',username=current_user.username,_anchor='indicator')}}">Secured</a>
+            </li>
         </ul>
     </div>
     <div class="container2">
         <h1 id="indicator">Normal Links</h1>
-        <div class="normal-link">
-            {% if links.items %}
+        <div class="normal-link" id="normal">
+            {% set links=getlinkData(v,page) %}
                 {% for link in links.items %}
                     <div class="link-box">
                         <div class="box-head">
@@ -60,9 +66,15 @@
                         </div>
                         <div class="box-link">
                             <h2 id="box-link-head">Go To</h2>
-                            <a href="{{ link.user_link }}" target="_blank" id="box-link">
-                                <img src="{{ url_for('static',filename='default_imgs/launch.svg') }}" id="goto">
-                            </a>
+                            {% if link.link_type == "protected" %}
+                                <a href="{{ decrypt(link.user_link) }}" target="_blank" id="box-link">
+                                    <img src="{{ url_for('static',filename='default_imgs/launch.svg') }}" id="goto">
+                                </a>
+                            {% else %}
+                                <a href="{{ link.user_link }}" target="_blank" id="box-link">
+                                    <img src="{{ url_for('static',filename='default_imgs/launch.svg') }}" id="goto">
+                                </a>
+                            {% endif %}
                         </div>
                         <div class="box-note">
                             <h2 id="box-note-head">Notes</h2>
@@ -78,17 +90,18 @@
                         </div>
                     </div>
                 {% endfor %}
-            {% endif %}
         </div>
-
+        <div class="secure-link" id="protected">
+            <h1>finally</h1>
+        </div>
         <div class="page-links">
             <div class="normal-pages">
                 {% for page_num in links.iter_pages() %}
                     {% if page_num %}
                         {% if links.page==page_num %}
-                            <a href="{{url_for('routes_bp.account',page=page_num,username=current_user.username,_anchor='indicator')}}" class="current-num">{{ page_num }}</a>
+                            <a href="{{url_for('routes_bp.account',page=page_num,v=v,username=current_user.username,_anchor='indicator')}}" class="current-num">{{ page_num }}</a>
                         {% else %}
-                            <a href="{{url_for('routes_bp.account',page=page_num,username=current_user.username,_anchor='indicator')}}" class="page-num">{{ page_num }}</a>
+                            <a href="{{url_for('routes_bp.account',page=page_num,v=v,username=current_user.username,_anchor='indicator')}}" class="page-num">{{ page_num }}</a>
                     {% endif %}
 
                     {% else %}
@@ -101,4 +114,22 @@
 </section>
 {% endblock %}
 {% block script %}
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    var v=urlParams.get("v");
+
+    // Checking parameters and changing the page
+    if (v=="normal"){
+        $("#sec-link1 a").css("color","rgb(88,81,219)");
+        $("#indicator").text("Normal Links");
+        console.log("das")
+    }else if (v=="protected"){
+        $("#sec-link3 a").css("color","rgb(88,81,219)");
+        $("#indicator").text("Secure Links")
+    }else if (v=="youtube"){
+        $("#sec-link2 a").css("color","rgb(88,81,219)");
+        $("#indicator").text("Youtube Links")
+    }
+
+</script>
 {% endblock %}
