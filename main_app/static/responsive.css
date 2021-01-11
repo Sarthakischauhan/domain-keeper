@@ -166,9 +166,16 @@
     .all-links{
         margin-top: 70px;
     }
-    .sec-nav{
+    .sec-nav a{
         font-size: 12px;
     }
+    #delete-link,#qr-link,#yt-link{
+        width: 22px;
+    }
+    .sec-link{
+        justify-content: center;
+    }
+
 
 }
 
@@ -188,6 +195,9 @@
     }
     .box-note{
         height: 80px;
+    }
+    .sec-nav {
+        margin: 0 0;
     }
 
 
@@ -222,7 +232,7 @@
         height: 320px;
     }
 
-    #delete-link{
+    #delete-link,#qr-link,#yt-link{
         width: 20px;
     }
 

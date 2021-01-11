@@ -13,5 +13,5 @@ function flashboxEnd(){
     }
 }
 
-
-
+var $animateBox = $(".link-box");
+var $window = $(window);

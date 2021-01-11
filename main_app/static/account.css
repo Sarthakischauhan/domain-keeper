@@ -259,7 +259,7 @@
     padding-top: 4px;
 }
 
-#delete-link,#qr-link{
+#delete-link,#qr-link,#yt-link{
     width: 25px;
     margin-top:5px;
     margin-left: 10px;
@@ -267,7 +267,7 @@
     filter: drop-shadow(0px 0px 2px #000);
 }
 
-#delete-link:hover,#qr-link:hover{
+#delete-link:hover,#qr-link:hover,#yt-link:hover{
     transform: scale(1.1);
 }
 

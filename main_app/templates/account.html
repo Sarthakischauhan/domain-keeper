@@ -6,6 +6,7 @@
 {% block link %}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='account.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='responsive.css') }}">
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 {% endblock link %}
 
 {% block content %}
@@ -60,7 +61,7 @@
         <div class="normal-link" id="normal">
             {% set links=getlinkData(v,page) %}
                 {% for link in links.items %}
-                    <div class="link-box">
+                    <div class="link-box" data-aos="fade-up">
                         <div class="box-head">
                             <h1 id="box-head">{{ title_unfold(link.title) }}</h1>
                         </div>
@@ -89,7 +90,7 @@
                             </a>
                             {% if link.link_type == "youtube" %}
                                 <a href="{{ url_for('routes_bp.yt_player',linkID=link.id) }}" target="_blank">
-                                    <img src="{{ url_for('static',filename='default_imgs/youtube.svg') }}" id="qr-link">
+                                    <img src="{{ url_for('static',filename='default_imgs/youtube.svg') }}" id="yt-link">
                                 </a>
                             {% endif %}
                         </div>
@@ -134,6 +135,8 @@
     }else if (v=="youtube"){
         $("#sec-link2 a").css("color","rgb(88,81,219)");
         $("#indicator").text("Youtube Links")
+    }else{
+        $("#sec-link1 a").css("color","rgb(88,81,219)");
     }
 
 </script>
