@@ -87,6 +87,11 @@
                             <a href="{{ url_for('routes_bp.generate_qr',linkID=link.id) }}">
                                 <img src="{{ url_for('static',filename='default_imgs/qr-code.svg') }}" id="qr-link">
                             </a>
+                            {% if link.link_type == "youtube" %}
+                                <a href="{{ url_for('routes_bp.yt_player',linkID=link.id) }}" target="_blank">
+                                    <img src="{{ url_for('static',filename='default_imgs/youtube.svg') }}" id="qr-link">
+                                </a>
+                            {% endif %}
                         </div>
                     </div>
                 {% endfor %}
