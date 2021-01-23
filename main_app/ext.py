@@ -3,12 +3,14 @@ from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_migrate import Migrate,MigrateCommand
+from flask_sitemap import Sitemap
 
 #initializing the dependency
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
 bcrypt = Bcrypt(app)
 migrate = Migrate(app,db)
+ext = Sitemap(app=app)
 
 login_manager.login_view = "auth_bp.login"
 
@@ -27,5 +29,5 @@ def push_to_templates():
 
     return dict(
             success_or_not = success_or_not,
-            title_unfold = title_unfold,
-            )
+            title_unfold = title_unfold,)
+

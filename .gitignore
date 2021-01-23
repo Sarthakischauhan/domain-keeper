@@ -1,6 +1,6 @@
 venv/
 structure.txt
 __pycache__/
-bash-scrpt.sh
+start.sh
 secret.key
 key_generate.py
