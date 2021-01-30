@@ -68,7 +68,7 @@
                         <div class="box-link">
                             <h2 id="box-link-head">Go To</h2>
                             {% if link.link_type == "protected" %}
-                                <a href="{{ decrypt(link.user_link) }}" target="_blank" id="box-link">
+                                <a href="{{ decrypt(link.user_link) }}" target="_blank" id="box-link" class="private">
                                     <img src="{{ url_for('static',filename='default_imgs/launch.svg') }}" id="goto">
                                 </a>
                             {% else %}
@@ -138,6 +138,10 @@
     }else{
         $("#sec-link1 a").css("color","rgb(88,81,219)");
     }
+
+    $(".private").on('click',function(){
+        return confirm("This is a private link . We recommend it opening in incognito");
+    });
 
 </script>
 {% endblock %}
